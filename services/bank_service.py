@@ -8,12 +8,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from models.account_balance import AccountBalance
+from models.account_movements import AccountMovements
+from models.credit_card import CreditCard
 
 class BankService():
-    
+
     def __init__(self) -> None:
-        self.create_driver()
+        # self.create_driver()
         pass
 
     def create_driver(self):
@@ -29,7 +31,7 @@ class BankService():
         options.add_experimental_option(
             'excludeSwitches', ['enable-automation'])
         self.driver = webdriver.Chrome(options=options)
-   
+
     def connect(self):
         self.driver.get('https://login.bankhapoalim.co.il/ng-portals/auth/he/')
         element = self.driver.find_element(By.ID, 'userCode')
@@ -41,6 +43,27 @@ class BankService():
         wait1.until(EC.presence_of_element_located(
             (By.CLASS_NAME, 'balance-and-limits')))
         print('Connected...')
-    
+
+    def __scrap_credit_card(self):
+        # TODO - __scrap_credit_card fill data
+        creditCard = CreditCard('tags', 'businessName', 'date',
+                 'numPayments', 'currentPayment', 'amount', 'owner')
+        creditCard.save_data()
+
+    def __scrap_account_movements(self):
+        # TODO - __scrap_account_movements fill data
+        movement = AccountMovements('action', 'balance', 'date', 'amount')
+        movement.save_data()
+
+    def __scrap_account_balance(self):
+        # element = self.driver.find_element(
+        #     By.XPATH, '//*[@id="transactions-print-id-12-716-8622"]/poalim-balance-and-limits/section/ul/li[1]/div/span[1]/span/span[1]')
+        # TODO - fill balance
+        balance = AccountBalance('999999')
+        balance.save_data()
+
     def scrap(self):
-        print('scrapping...')
+        # self.__scrap_credit_card()
+        # self.__scrap_account_balance()
+        # self.__scrap_account_movements()
+        pass

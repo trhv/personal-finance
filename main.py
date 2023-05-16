@@ -1,9 +1,10 @@
-from services.bankService import BankService
-from services.whatsupService import WhatsupService
+from services.bank_service import BankService
+from services.whatsup_service import WhatsupService
 
 bank = BankService()
-bank.connect()
+# bank.connect()
 bank.scrap()
 
-whatsUp = WhatsupService()
-whatsUp.send()
+
+# whatsUp = WhatsupService()
+# whatsUp.send()
