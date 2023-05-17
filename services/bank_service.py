@@ -15,7 +15,7 @@ from models.credit_card import CreditCard
 class BankService():
 
     def __init__(self) -> None:
-        # self.create_driver()
+        self.create_driver()
         pass
 
     def create_driver(self):
@@ -56,14 +56,15 @@ class BankService():
         movement.save_data()
 
     def __scrap_account_balance(self):
-        # element = self.driver.find_element(
-        #     By.XPATH, '//*[@id="transactions-print-id-12-716-8622"]/poalim-balance-and-limits/section/ul/li[1]/div/span[1]/span/span[1]')
-        # TODO - fill balance
-        balance = AccountBalance('999999')
-        balance.save_data()
+        element = self.driver.find_element(
+            By.XPATH, '/html/body/rb-root/poalim-header-footer-layout/main/poalim-dynamic-component-content/div/rb-homepage/section[2]/section[1]/div[1]/poalim-balance-and-limits/section/ul/li[1]/div/span[1]/span')
+        spans = element.find_elements(By.TAG_NAME,'span')
+        balance= float(("".join([span.text for span in spans])).replace(',',''))
+        accountBalance = AccountBalance(balance)
+        accountBalance.save_data()
 
     def scrap(self):
         # self.__scrap_credit_card()
-        # self.__scrap_account_balance()
+        self.__scrap_account_balance()
         # self.__scrap_account_movements()
         pass
