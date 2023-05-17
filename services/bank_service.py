@@ -12,6 +12,7 @@ from models.account_balance import AccountBalance
 from models.account_movements import AccountMovements
 from models.credit_card import CreditCard
 
+
 class BankService():
 
     def __init__(self) -> None:
@@ -47,24 +48,35 @@ class BankService():
     def __scrap_credit_card(self):
         # TODO - __scrap_credit_card fill data
         creditCard = CreditCard('tags', 'businessName', 'date',
-                 'numPayments', 'currentPayment', 'amount', 'owner')
+                                'numPayments', 'currentPayment', 'amount', 'owner')
         creditCard.save_data()
 
     def __scrap_account_movements(self):
+        self.driver.find_element(
+            By.XPATH, '//*[@id="mega-menu-1"]').click()
+        wait1 = WebDriverWait(self.driver, 6000)
+        wait1.until(EC.visibility_of_element_located(
+            (By.XPATH, '//*[@id="period-filter-button-0"]'))).click()
+      
+        wait2 = WebDriverWait(self.driver, 6000)
+        wait2.until(EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="period-filter-menu-0"]/li[1]"]'))).click()
+
         # TODO - __scrap_account_movements fill data
         movement = AccountMovements('action', 'balance', 'date', 'amount')
-        movement.save_data()
+        # movement.save_data()
 
     def __scrap_account_balance(self):
         element = self.driver.find_element(
             By.XPATH, '/html/body/rb-root/poalim-header-footer-layout/main/poalim-dynamic-component-content/div/rb-homepage/section[2]/section[1]/div[1]/poalim-balance-and-limits/section/ul/li[1]/div/span[1]/span')
-        spans = element.find_elements(By.TAG_NAME,'span')
-        balance= float(("".join([span.text for span in spans])).replace(',',''))
+        spans = element.find_elements(By.TAG_NAME, 'span')
+        balance = float(
+            ("".join([span.text for span in spans])).replace(',', ''))
         accountBalance = AccountBalance(balance)
         accountBalance.save_data()
 
     def scrap(self):
         # self.__scrap_credit_card()
-        self.__scrap_account_balance()
-        # self.__scrap_account_movements()
+        # self.__scrap_account_balance()
+        self.__scrap_account_movements()
         pass
