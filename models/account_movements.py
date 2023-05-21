@@ -3,16 +3,12 @@ from models.base_model import BaseModel
 
 class AccountMovements(BaseModel):
 
-    def __init__(self, action, balance, date, amount) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.action = action
-        self.date = date
-        self.balance = balance
-        self.amount = amount
         self.dbName = 'AccountMovements'
         pass
 
-    def save_data(self):
+    def save_data(self, action,balance,date,amount):
         self.data_service.save_data(
-            [self.action, self.balance, self.date, self.amount], self.dbName)
+            [action, balance, date, amount], self.dbName)
         pass
