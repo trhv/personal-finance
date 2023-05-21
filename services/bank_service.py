@@ -53,15 +53,15 @@ class BankService():
     def __scrap_account_movements(self):
         # TODO - __scrap_account_movements fill data
         movement = AccountMovements('action', 'balance', 'date', 'amount')
-        movement.save_data()
+        movement.save_data('העברה כספית', '6589.89',)
 
     def __scrap_account_balance(self):
         element = self.driver.find_element(
             By.XPATH, '/html/body/rb-root/poalim-header-footer-layout/main/poalim-dynamic-component-content/div/rb-homepage/section[2]/section[1]/div[1]/poalim-balance-and-limits/section/ul/li[1]/div/span[1]/span')
         spans = element.find_elements(By.TAG_NAME,'span')
         balance= float(("".join([span.text for span in spans])).replace(',',''))
-        accountBalance = AccountBalance(balance)
-        accountBalance.save_data()
+        accountBalance = AccountBalance()
+        accountBalance.save_data(balance)
 
     def scrap(self):
         # self.__scrap_credit_card()
