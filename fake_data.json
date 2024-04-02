@@ -1,0 +1,68 @@
+{
+  "balance": {
+    "in_debt": true,
+    "amount": "34500"
+  },
+  "account_movements": [
+    {
+      "date": "25/03/24",
+      "amount": "250",
+      "in_debt": true,
+      "action":"קצבת ילדים"
+    },
+    {
+      "date": "25/03/24",
+      "amount": "234",
+      "in_debt": false,
+      "action":"קצבת ילדים"
+    },
+    {
+      "date": "25/03/24",
+      "amount": "250",
+      "in_debt": true,
+      "action":"קצבת ילדים"
+    },
+    {
+      "date": "25/03/24",
+      "amount": "234",
+      "in_debt": false,
+      "action":"קצבת ילדים"
+    }
+  ],
+  "credit_cards": {
+    "ilona": {
+      "total": "14000",
+      "charges": [
+        {
+          "business":"סברי",
+          "date": "25/03/24",
+          "amount": "250"
+        },
+        {
+          "business":"סברי",
+          "date": "25/03/24",
+          "amount": "250"
+        },
+        {
+          "business":"סברי",
+          "date": "25/03/24",
+          "amount": "250"
+        },
+        {
+          "business":"סברי",
+          "date": "25/03/24",
+          "amount": "250"
+        }
+      ]
+    },
+    "arye": {
+      "total": "14000",
+      "charges": [
+        {
+          "date": "25/03/24",
+          "amount": "250"
+        }
+      ]
+    }
+  }
+}
